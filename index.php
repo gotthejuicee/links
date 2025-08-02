@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
+    <link rel="stylesheet" href="main.css">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -59,87 +60,6 @@
             }
         }
     </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
-
-        .gradient-text {
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            background-image: linear-gradient(45deg, #4f46e5, #ec4899);
-        }
-
-        .glow {
-            box-shadow: 0 0 15px rgba(79, 70, 229, 0.5);
-        }
-
-        .glow-hover:hover {
-            box-shadow: 0 0 20px rgba(79, 70, 229, 0.7);
-        }
-
-        .link-card {
-            transition: all 0.3s ease;
-            transform-style: preserve-3d;
-        }
-
-        .link-card:hover {
-            transform: translateY(-5px) scale(1.02);
-        }
-
-
-        .scroll-animate {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-        }
-
-        .scroll-animate.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .blob {
-            filter: blur(40px);
-            opacity: 0.7;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        .container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        main {
-            flex: 1;
-        }
-
-        footer {
-            opacity: 1 !important; /* Переопределяем анимацию */
-            transform: none !important;
-        }
-
-        .theme-icon {
-            transition: transform 0.5s ease-in-out;
-        }
-        #theme-toggle:hover .theme-icon {
-            transform: rotate(180deg);
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-        .heart-pulse {
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-    </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 font-sans min-h-screen transition-colors duration-300">
 <!-- Анимированные фоновые элементы -->
@@ -363,49 +283,6 @@
         <p class="mt-1">Створено з <i class="fas fa-heart text-red-500 heart-pulse"></i> </p>
     </footer>
 </div>
-
-<script>
-    // Переключение темы
-    const themeToggle = document.getElementById('theme-toggle');
-    const html = document.documentElement;
-
-    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        html.classList.add('dark');
-    } else {
-        html.classList.remove('dark');
-    }
-
-    themeToggle.addEventListener('click', () => {
-        html.classList.toggle('dark');
-        localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
-    });
-
-    // Анимация при скролле
-    const animateOnScroll = () => {
-        const elements = document.querySelectorAll('.scroll-animate');
-
-        elements.forEach(element => {
-            const elementPosition = element.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-
-            if (elementPosition < windowHeight - 100) {
-                element.classList.add('visible');
-            }
-        });
-    };
-
-    window.addEventListener('load', animateOnScroll);
-    window.addEventListener('scroll', animateOnScroll);
-
-    // Плавный скролл для якорей
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-</script>
+<script src="main.js"></script>
 </body>
 </html>
